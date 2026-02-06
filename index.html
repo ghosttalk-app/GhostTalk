@@ -1,39 +1,84 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>GhostTalk</title>
-  <link rel="stylesheet" href="style.css">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GhostTalk</title>
+<link rel="stylesheet" href="style.css">
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-storage-compat.js"></script>
+<script src="emoji-picker/index.js" defer></script>
 </head>
 <body>
 
-  <div id="app">
-    <h1>GhostTalk</h1>
+<!-- Lamp Login -->
+<div id="lampContainer" onclick="toggleLamp()">
+  <div id="lamp"></div>
+</div>
+<audio id="clickSound" src="assets/click.mp3"></audio>
 
-    <!-- Login/Sign-up Form -->
-    <div id="loginContainer">
-      <input type="email" id="email" placeholder="Email" />
-      <input type="password" id="password" placeholder="Password" />
-      <button id="signupBtn">Sign Up</button>
-      <button id="loginBtn">Log In</button>
-    </div>
+<!-- Login/Signup Form -->
+<div class="login-card" id="loginForm">
+  <h2>GhostTalk Login</h2>
+  <input type="text" id="displayName" placeholder="Display Name">
+  <input type="email" id="email" placeholder="Email">
+  <input type="password" id="password" placeholder="Password">
+  <input type="file" id="avatarInput" accept="image/*">
+  <button id="signupBtn">Sign Up</button>
+  <button id="loginBtn">Login</button>
+  <div id="themeToggle">
+    <label>Light Mode <input type="checkbox" id="themeSwitch"></label>
+  </div>
+</div>
 
-    <!-- Chat UI (hidden until login) -->
-    <div id="chatContainer" style="display:none;">
-      <p id="status"></p>
-      <div id="messages"></div>
-      <input id="messageInput" type="text" placeholder="Type a message..." />
-      <button id="sendBtn">Send</button>
-    </div>
+<!-- Chat Container -->
+<div id="chatContainer" style="display:none;">
+  <div id="chatHeader">
+    <h2>GhostTalk</h2>
+    <button id="logoutBtn">Logout</button>
   </div>
 
-  <!-- Firebase SDK -->
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+  <!-- Bottom Navigation -->
+  <div id="navTabs">
+    <button id="globalTab" class="activeTab">Global</button>
+    <button id="groupTab">Group</button>
+    <button id="privateTab">Private</button>
+  </div>
 
-  <!-- App JS -->
-  <script src="app.js"></script>
+  <!-- Global Chat -->
+  <div class="chatView" id="globalChat">
+    <div class="messages" id="globalMessages"></div>
+    <emoji-picker id="globalEmoji"></emoji-picker>
+    <textarea id="globalInput" placeholder="Type a message"></textarea>
+    <input type="file" id="globalFile">
+    <button id="sendGlobalBtn">Send</button>
+  </div>
+
+  <!-- Group Chat -->
+  <div class="chatView" id="groupChat" style="display:none;">
+    <input type="text" id="roomInput" placeholder="Enter room name">
+    <button id="joinRoomBtn">Join Room</button>
+    <h3 id="currentRoomTitle">Room: </h3>
+    <div class="messages" id="groupMessages"></div>
+    <emoji-picker id="groupEmoji"></emoji-picker>
+    <textarea id="groupInput" placeholder="Type a message"></textarea>
+    <input type="file" id="groupFile">
+    <button id="sendGroupBtn">Send</button>
+  </div>
+
+  <!-- Private Chat -->
+  <div class="chatView" id="privateChat" style="display:none;">
+    <div id="userList"></div>
+    <div class="messages" id="privateMessages"></div>
+    <emoji-picker id="privateEmoji"></emoji-picker>
+    <textarea id="privateInput" placeholder="Type a message"></textarea>
+    <input type="file" id="privateFile">
+    <button id="sendPrivateBtn">Send</button>
+  </div>
+</div>
+
+<script src="app.js"></script>
 </body>
 </html>
