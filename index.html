@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>GhostTalk</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <div id="app">
+    <h1>GhostTalk</h1>
+    <p id="status">Connecting anonymously...</p>
+
+    <div id="chat">
+      <div id="messages"></div>
+
+      <input id="messageInput" type="text" placeholder="Type a message..." />
+      <button id="sendBtn">Send</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-database-compat.js"></script>
+
+  <!-- Your JS -->
+  <script src="app.js"></script>
+</body>
+</html>
