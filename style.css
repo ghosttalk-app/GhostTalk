@@ -17,17 +17,9 @@ body {
   border-radius: 8px;
 }
 
-#messages {
-  height: 300px;
-  overflow-y: auto;
-  background: #020617;
-  border: 1px solid #1e293b;
-  padding: 10px;
-  margin-bottom: 10px;
-}
-
 input {
-  width: 75%;
+  width: 100%;
+  margin: 5px 0;
   padding: 8px;
   border: 1px solid #1e293b;
   border-radius: 4px;
@@ -36,8 +28,9 @@ input {
 }
 
 button {
-  width: 22%;
+  width: 48%;
   padding: 8px;
+  margin: 5px 1%;
   background: #2563eb;
   color: white;
   border: none;
@@ -47,4 +40,13 @@ button {
 
 button:hover {
   background: #1d4ed8;
+}
+
+#messages {
+  height: 300px;
+  overflow-y: auto;
+  background: #020617;
+  border: 1px solid #1e293b;
+  padding: 10px;
+  margin-bottom: 10px;
 }
